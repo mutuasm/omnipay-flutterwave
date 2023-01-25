@@ -1,17 +1,17 @@
 {
-    "name": ":vendor/omnipay-:gateway",
-    "description": ":package_description",
+    "name": "mwanziamutua/omnipay-flutterwave",
+    "description": "Flutterwave driver for the Omnipay PHP payment processing library",
     "keywords": [
         "omnipay",
-        ":gateway"
+        "flutterwave"
     ],
-    "homepage": "https://github.com/:vendor/omnipay-:gateway",
+    "homepage": "https://github.com/mwanziamutua/omnipay-flutterwave",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": ":author_email",
-            "homepage": ":author_website"
+            "name": "Mwanzia Mutua",
+            "email": "smutua@dimetechgroup.com",
+            "homepage": "https://dimetechgroup.com"
         }
     ],
     "require": {

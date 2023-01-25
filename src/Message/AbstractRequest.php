@@ -1,6 +1,6 @@
 <?php
 
-namespace Omnipay\Skeleton\Message;
+namespace Omnipay\Flutterwave\Message;
 
 use Omnipay\Common\Message\AbstractRequest as BaseAbstractRequest;
 
@@ -10,8 +10,7 @@ use Omnipay\Common\Message\AbstractRequest as BaseAbstractRequest;
  */
 abstract class AbstractRequest extends BaseAbstractRequest
 {
-    protected $liveEndpoint = 'https://api.example.com';
-    protected $testEndpoint = 'https://api-test.example.com';
+    protected $endpoint = 'https://api.flutterwave.com/v3/payments';
 
     public function getKey()
     {
@@ -23,32 +22,32 @@ abstract class AbstractRequest extends BaseAbstractRequest
         return $this->setParameter('key', $value);
     }
 
-    public function sendData($data)
-    {
-        $url = $this->getEndpoint().'?'.http_build_query($data, '', '&');
-        $response = $this->httpClient->get($url);
-
-        $data = json_decode($response->getBody(), true);
-
-        return $this->createResponse($data);
-    }
-
-    protected function getBaseData()
+     /**
+     * @return array
+     */
+    protected function getHeaders(): array
     {
         return [
-            'transaction_id' => $this->getTransactionId(),
-            'expire_date' => $this->getCard()->getExpiryDate('mY'),
-            'start_date' => $this->getCard()->getStartDate('mY'),
+            'Authorization' => 'Bearer ' . $this->getKey(),
+            'Content-Type' => 'application/json',
         ];
+    }
+
+    public function sendData($data)
+    {
+        $url = $this->getEndpoint();
+        $jsonData = json_encode($data);
+        $httpResponse = $this->httpClient->post(
+            $this->getEndpoint(),
+            $this->getHeaders(),
+            $jsonData
+        )->send();
+
+        return $httpResponse;
     }
 
     protected function getEndpoint()
     {
-        return $this->getTestMode() ? $this->testEndpoint : $this->liveEndpoint;
-    }
-
-    protected function createResponse($data)
-    {
-        return $this->response = new Response($this, $data);
+        return $this->endpoint;
     }
 }
