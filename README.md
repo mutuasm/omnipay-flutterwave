@@ -1,6 +1,6 @@
 # Omnipay: flutterwave
 
-**Skeleton gateway for the Omnipay PHP payment processing library**
+**Flutterwave gateway for the Omnipay PHP payment processing library**
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/mwanziamutua/omnipay-flutterwave.svg?style=flat-square)](https://packagist.org/packages/mwanziamutua/omnipay-flutterwave)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
